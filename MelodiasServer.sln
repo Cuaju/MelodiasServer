@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35208.52
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Host", "Host\Host.csproj", "{F4A30926-367A-4F10-BFB2-F1868B4DE45A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MelodiasService", "MelodiasService\MelodiasService.csproj", "{69A6BB9C-3144-4708-8AF3-23A1B3B9BF19}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F4A30926-367A-4F10-BFB2-F1868B4DE45A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F4A30926-367A-4F10-BFB2-F1868B4DE45A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F4A30926-367A-4F10-BFB2-F1868B4DE45A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F4A30926-367A-4F10-BFB2-F1868B4DE45A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{69A6BB9C-3144-4708-8AF3-23A1B3B9BF19}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{69A6BB9C-3144-4708-8AF3-23A1B3B9BF19}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{69A6BB9C-3144-4708-8AF3-23A1B3B9BF19}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{69A6BB9C-3144-4708-8AF3-23A1B3B9BF19}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1EF2B74C-3F31-4F21-B724-CF67F90AF0B9}
+	EndGlobalSection
+EndGlobal
