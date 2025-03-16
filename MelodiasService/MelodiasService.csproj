@@ -33,6 +33,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -43,12 +44,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Implementations\ServiceImplementation.cs" />
-    <Compile Include="Implementations\ServiceImplementation.UsersManager.cs" />
-    <Compile Include="IUsersManager.cs" />
+    <Compile Include="Implementations\UserManager\ServiceImplementation.UsersManager.cs" />
+    <Compile Include="Implementations\UserManager\IUsersManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DataAccess\DataAccess.csproj">
+      <Project>{957dd9ff-e63a-4521-85f8-345c990e4a13}</Project>
+      <Name>DataAccess</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
