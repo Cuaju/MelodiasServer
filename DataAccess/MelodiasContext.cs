@@ -18,7 +18,7 @@
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
 
-            modelBuilder.Entity<Employee>().ToTable("Employees").Property(e => e.userName)
+            modelBuilder.Entity<Employee>().ToTable("Employees").Property(e => e.UserName)
          .HasColumnAnnotation(IndexAnnotation.AnnotationName,
              new IndexAnnotation(new IndexAttribute("IX_EmployeeUserName") { IsUnique = true }));
 

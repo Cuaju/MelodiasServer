@@ -19,7 +19,15 @@ namespace MelodiasService.Implementations
                 Employee auxEmployee = new Employee();
                 EmployeeDao employeeDao = new EmployeeDao();
 
-                auxEmployee.userName = employee.userName;
+                auxEmployee.UserName = employee.userName;
+                auxEmployee.Name = employee.name;
+                auxEmployee.Surnames = employee.surnames;
+                auxEmployee.ZipCode = employee.zipCode;
+                auxEmployee.City = employee.city;
+                auxEmployee.Address = employee.address;
+                auxEmployee.Email = employee.mail;
+                auxEmployee.Phone = employee.phone;
+                auxEmployee.Password = employee.password;
 
                 return employeeDao.AddEmployee(auxEmployee);
             }
@@ -29,6 +37,24 @@ namespace MelodiasService.Implementations
             }
         }
 
+        public bool DeleteEmployee(int idEmployee)
+        {
+            EmployeeDao employeeDao = new EmployeeDao();
+            return employeeDao.DeleteEmployee(idEmployee);
+        }
+
+        public int GetIdEmployeeByUserName(string userName)
+        {
+           EmployeeDao employeeDao = new EmployeeDao();
+            try
+            {
+                return employeeDao.GetIdEmployeeByUserName(userName);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"{ex.Message}");
+            }
+        }
         public bool LogIn(string username, string password)
         {
             Console.WriteLine("Client Working...");
