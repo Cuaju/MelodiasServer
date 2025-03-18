@@ -6,7 +6,7 @@ using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MelodiasService.Implementations.SupplierManager
+namespace MelodiasService
 {
     [ServiceContract]
     public interface ISuppliersManager

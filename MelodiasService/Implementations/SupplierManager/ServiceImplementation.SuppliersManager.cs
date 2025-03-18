@@ -7,7 +7,7 @@ using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MelodiasService.Implementations.SupplierManager
+namespace MelodiasService.Implementations
 {
     public partial class ServiceImplementation : ISuppliersManager
     {
