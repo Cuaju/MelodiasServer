@@ -43,9 +43,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DTOs\SupplierDTO.cs" />
     <Compile Include="Implementations\ProductManager\IProductsManager.cs" />
     <Compile Include="Implementations\ProductManager\ServiceImplementation.ProductsManager.cs" />
     <Compile Include="Implementations\ServiceImplementation.cs" />
+    <Compile Include="Implementations\SupplierManager\ISuppliersManager.cs" />
+    <Compile Include="Implementations\SupplierManager\ServiceImplementation.SuppliersManager.cs" />
     <Compile Include="Implementations\UserManager\ServiceImplementation.UsersManager.cs" />
     <Compile Include="Implementations\UserManager\IUsersManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
