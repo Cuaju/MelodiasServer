@@ -57,12 +57,14 @@ namespace MelodiasService.Implementations
         }
         public bool LogIn(string username, string password)
         {
-            Console.WriteLine("Client Working...");
-            if (username == "1" && password == "123")
+          EmployeeDao employeeDao=new EmployeeDao();
+          Employee employee = employeeDao.GetEmployeeByUserName(username);
+
+            if (employee != null && employee.Password == password)
             {
                 return true;
             }
-            return false;
+                return false;
         }
 
 

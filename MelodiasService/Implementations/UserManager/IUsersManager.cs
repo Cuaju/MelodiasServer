@@ -28,7 +28,7 @@ namespace MelodiasService
     public class EmployeeDataContract
     {
         [DataMember]
-        public string userName { get; set; }
+        public string userName { get; set; }    
 
         [DataMember]
         public string name {  get; set; }

@@ -35,8 +35,8 @@ namespace DataAccess.DAO
                 }
 
             }
-
         }
+
 
         public bool UpdateEmployee(Employee employee)
         {
@@ -74,6 +74,22 @@ namespace DataAccess.DAO
                 }
             }
         }
+
+        public Employee GetEmployeeByUserName(string userName)
+        {
+            try
+            {
+                using (var context = new MelodiasContext())
+                {
+                    return context.Employees.FirstOrDefault(e=>e.UserName ==userName);
+                }
+            }
+            catch (EntityException ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
 
         public int GetIdEmployeeByUserName(string userName)
         {
