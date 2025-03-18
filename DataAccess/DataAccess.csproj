@@ -57,6 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DAO\EmployeeDao.cs" />
+    <Compile Include="DAO\ProductDao.cs" />
     <Compile Include="MelodiasContext.cs" />
     <Compile Include="Migrations\202503151941320_InitialCreate.cs" />
     <Compile Include="Migrations\202503151941320_InitialCreate.Designer.cs">
@@ -66,8 +67,13 @@
     <Compile Include="Migrations\202503160715369_NewAtributes.Designer.cs">
       <DependentUpon>202503160715369_NewAtributes.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202503172134574_TablaParaProductos.cs" />
+    <Compile Include="Migrations\202503172134574_TablaParaProductos.Designer.cs">
+      <DependentUpon>202503172134574_TablaParaProductos.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Employee.cs" />
+    <Compile Include="Models\Product.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -80,6 +86,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202503160715369_NewAtributes.resx">
       <DependentUpon>202503160715369_NewAtributes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202503172134574_TablaParaProductos.resx">
+      <DependentUpon>202503172134574_TablaParaProductos.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
