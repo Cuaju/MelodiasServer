@@ -16,6 +16,7 @@ namespace DataAccess
 
         public virtual DbSet<Employee> Employees { get; set; }
         public virtual DbSet<Product> Products { get; set; }
+        public virtual DbSet<Supplier> SupplierCompanies { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -36,6 +37,19 @@ namespace DataAccess
             modelBuilder.Entity<Product>()
                 .Property(p => p.SalePrice)
                 .HasPrecision(10, 2);
+
+
+            modelBuilder.Entity<Supplier>().Property(n => n.Name)
+                .HasColumnAnnotation(
+                    IndexAnnotation.AnnotationName,
+                    new IndexAnnotation(
+                        new IndexAttribute("IX_SupplierName") { IsUnique = true }));
+            
+            modelBuilder.Entity<Supplier>()
+                        .Property(s => s.Email)
+                        .HasColumnAnnotation(
+                            IndexAnnotation.AnnotationName,
+                            new IndexAnnotation(new IndexAttribute("IX_SupplierCompanyEmail") { IsUnique = true }));
 
             base.OnModelCreating(modelBuilder);
         }

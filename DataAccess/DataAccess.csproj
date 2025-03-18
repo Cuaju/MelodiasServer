@@ -71,9 +71,14 @@
     <Compile Include="Migrations\202503172134574_TablaParaProductos.Designer.cs">
       <DependentUpon>202503172134574_TablaParaProductos.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202503180555342_SuppliersTableAndConfig.cs" />
+    <Compile Include="Migrations\202503180555342_SuppliersTableAndConfig.Designer.cs">
+      <DependentUpon>202503180555342_SuppliersTableAndConfig.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Employee.cs" />
     <Compile Include="Models\Product.cs" />
+    <Compile Include="Models\Supplier.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -89,6 +94,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202503172134574_TablaParaProductos.resx">
       <DependentUpon>202503172134574_TablaParaProductos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202503180555342_SuppliersTableAndConfig.resx">
+      <DependentUpon>202503180555342_SuppliersTableAndConfig.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
