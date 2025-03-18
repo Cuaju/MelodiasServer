@@ -1,30 +1,43 @@
-﻿    using DataAccess.Models;
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations.Schema;
-    using System.Data.Entity;
-    using System.Data.Entity.Infrastructure.Annotations;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
+﻿using DataAccess.Models;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.Entity;
+using System.Data.Entity.Infrastructure.Annotations;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-    namespace DataAccess
+namespace DataAccess
+{
+    public class MelodiasContext : DbContext
     {
-        public class MelodiasContext : DbContext
-        {
-            public virtual DbSet<Employee> Employees { get; set; }
-
         public MelodiasContext() : base("name=MelodiasContext") { }
+
+        public virtual DbSet<Employee> Employees { get; set; }
+        public virtual DbSet<Product> Products { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Employee>().ToTable("Employees")
+                .Property(e => e.UserName)
+                .HasColumnAnnotation(IndexAnnotation.AnnotationName,
+                    new IndexAnnotation(new IndexAttribute("IX_EmployeeUserName") { IsUnique = true }));
 
-            modelBuilder.Entity<Employee>().ToTable("Employees").Property(e => e.UserName)
-         .HasColumnAnnotation(IndexAnnotation.AnnotationName,
-             new IndexAnnotation(new IndexAttribute("IX_EmployeeUserName") { IsUnique = true }));
+            modelBuilder.Entity<Product>().ToTable("Products")
+                .Property(p => p.ProductName)
+                .HasColumnAnnotation(IndexAnnotation.AnnotationName,
+                    new IndexAnnotation(new IndexAttribute("IX_ProductName") { IsUnique = true }));
+
+            modelBuilder.Entity<Product>()
+                .Property(p => p.PurchasePrice)
+                .HasPrecision(10, 2);
+
+            modelBuilder.Entity<Product>()
+                .Property(p => p.SalePrice)
+                .HasPrecision(10, 2);
 
             base.OnModelCreating(modelBuilder);
-
-
         }
     }
-    }
+}
