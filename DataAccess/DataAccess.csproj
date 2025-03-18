@@ -58,6 +58,7 @@
   <ItemGroup>
     <Compile Include="DAO\EmployeeDao.cs" />
     <Compile Include="DAO\ProductDao.cs" />
+    <Compile Include="DAO\SupplierDao.cs" />
     <Compile Include="MelodiasContext.cs" />
     <Compile Include="Migrations\202503151941320_InitialCreate.cs" />
     <Compile Include="Migrations\202503151941320_InitialCreate.Designer.cs">
