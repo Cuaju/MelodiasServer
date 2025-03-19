@@ -19,6 +19,13 @@ namespace MelodiasService
 
         [OperationContract]
         bool EditProduct(ProductDataContract product);
+
+        [OperationContract]
+        bool ExistsProductByName(string productName, int productId);
+
+        [OperationContract]
+        bool DeleteProduct(int productId);
+
     }
 
     [DataContract]
@@ -59,5 +66,8 @@ namespace MelodiasService
 
         [DataMember]
         public bool Status { get; set; }
+
+        [DataMember]
+        public bool HasSales { get; set; }
     }
 }

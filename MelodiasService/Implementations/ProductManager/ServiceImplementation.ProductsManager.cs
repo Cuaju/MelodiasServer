@@ -17,6 +17,11 @@ namespace MelodiasService.Implementations
         {
             try
             {
+                if (productDao.ExistsProductByName(product.ProductName, product.ProductId))
+                {
+                    throw new FaultException("The product name is already in use by another product.");
+                }
+
                 Product newProduct = new Product
                 {
                     ProductName = product.ProductName,
@@ -64,7 +69,8 @@ namespace MelodiasService.Implementations
                     Model = p.Model,
                     Stock = p.Stock,
                     Photo = p.Photo,
-                    Status = p.Status
+                    Status = p.Status,
+                    HasSales = p.HasSales
                 }).ToList();
             }
             catch (Exception ex)
@@ -96,7 +102,9 @@ namespace MelodiasService.Implementations
                 bool updated = productDao.UpdateProduct(existingProduct);
 
                 if (!updated)
+                {
                     throw new FaultException("The product could not be updated.");
+                }
 
                 return true;
             }
@@ -105,5 +113,29 @@ namespace MelodiasService.Implementations
                 throw new FaultException("Error updating the product: " + ex.Message);
             }
         }
+
+        public bool ExistsProductByName(string productName, int productId)
+        {
+            return productDao.ExistsProductByName(productName, productId);
+        }
+
+        public bool DeleteProduct(int productId)
+        {
+            try
+            {
+                bool deleted = productDao.DeleteProduct(productId);
+                if (!deleted)
+                {
+                    throw new FaultException("The product could not be deleted.");
+                }
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException("Error deleting the product: " + ex.Message);
+            }
+        }
+
     }
 }

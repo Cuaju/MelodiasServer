@@ -50,5 +50,7 @@ namespace DataAccess.Models
 
         [Required]
         public bool Status { get; set; } = true;
+
+        public bool HasSales { get; set; }
     }
 }

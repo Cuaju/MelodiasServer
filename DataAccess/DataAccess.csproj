@@ -76,6 +76,10 @@
     <Compile Include="Migrations\202503180555342_SuppliersTableAndConfig.Designer.cs">
       <DependentUpon>202503180555342_SuppliersTableAndConfig.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202503190149159_NewAtributeHasSales.cs" />
+    <Compile Include="Migrations\202503190149159_NewAtributeHasSales.Designer.cs">
+      <DependentUpon>202503190149159_NewAtributeHasSales.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Employee.cs" />
     <Compile Include="Models\Product.cs" />
@@ -98,6 +102,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202503180555342_SuppliersTableAndConfig.resx">
       <DependentUpon>202503180555342_SuppliersTableAndConfig.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202503190149159_NewAtributeHasSales.resx">
+      <DependentUpon>202503190149159_NewAtributeHasSales.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
