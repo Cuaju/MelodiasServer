@@ -11,6 +11,30 @@ namespace MelodiasService.Implementations
 {
     public partial class ServiceImplementation : ISuppliersManager
     {
+        public bool DeleteSupplier(int supplierId)
+        {
+            try
+            {
+                return new SupplierDao().DeleteSupplier(supplierId);
+            }
+            catch (CommunicationException e)
+            {
+                Console.WriteLine(e.Message);
+                Console.WriteLine(e.StackTrace);
+            }
+            catch (TimeoutException e)
+            {
+                Console.WriteLine(e.Message);
+                Console.WriteLine(e.StackTrace);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                Console.WriteLine(e.StackTrace);
+            }
+            return false;
+        }
+
         public bool EditSupplier(SupplierDTO supplier)
         {
 

@@ -26,5 +26,7 @@ namespace MelodiasService
         [OperationContract]
         bool IsSupplierEmailTaken(string email);
 
+        [OperationContract]
+        bool DeleteSupplier(int supplierId);
     }
 }
