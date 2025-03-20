@@ -44,9 +44,21 @@ namespace MelodiasService.Implementations
 
                 return true;
             }
+            catch (FaultException ex)
+            {
+                throw new FaultException("Error de validación: " + ex.Message);
+            }
+            catch (CommunicationException)
+            {
+                throw new FaultException("Error de comunicación con el servidor. Intente más tarde.");
+            }
+            catch (TimeoutException)
+            {
+                throw new FaultException("Tiempo de espera agotado. El servidor no respondió.");
+            }
             catch (Exception ex)
             {
-                throw new FaultException("Error registering the product: " + ex.Message);
+                throw new FaultException("Error inesperado en el servidor: " + ex.Message);
             }
         }
 
@@ -73,9 +85,21 @@ namespace MelodiasService.Implementations
                     HasSales = p.HasSales
                 }).ToList();
             }
+            catch (FaultException ex)
+            {
+                throw new FaultException("Error de validación: " + ex.Message);
+            }
+            catch (CommunicationException)
+            {
+                throw new FaultException("Error de comunicación con el servidor. Intente más tarde.");
+            }
+            catch (TimeoutException)
+            {
+                throw new FaultException("Tiempo de espera agotado. El servidor no respondió.");
+            }
             catch (Exception ex)
             {
-                throw new FaultException("Error getting products: " + ex.Message);
+                throw new FaultException("Error inesperado en el servidor: " + ex.Message);
             }
         }
 
@@ -108,15 +132,46 @@ namespace MelodiasService.Implementations
 
                 return true;
             }
+            catch (FaultException ex)
+            {
+                throw new FaultException("Error de validación: " + ex.Message);
+            }
+            catch (CommunicationException)
+            {
+                throw new FaultException("Error de comunicación con el servidor. Intente más tarde.");
+            }
+            catch (TimeoutException)
+            {
+                throw new FaultException("Tiempo de espera agotado. El servidor no respondió.");
+            }
             catch (Exception ex)
             {
-                throw new FaultException("Error updating the product: " + ex.Message);
+                throw new FaultException("Error inesperado en el servidor: " + ex.Message);
             }
         }
 
         public bool ExistsProductByName(string productName, int productId)
         {
-            return productDao.ExistsProductByName(productName, productId);
+            try
+            {
+                return productDao.ExistsProductByName(productName, productId);
+            }
+            catch (FaultException ex)
+            {
+                throw new FaultException("Error de validación: " + ex.Message);
+            }
+            catch (CommunicationException)
+            {
+                throw new FaultException("Error de comunicación con el servidor. Intente más tarde.");
+            }
+            catch (TimeoutException)
+            {
+                throw new FaultException("Tiempo de espera agotado. El servidor no respondió.");
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException("Error inesperado en el servidor: " + ex.Message);
+            }
         }
 
         public bool DeleteProduct(int productId)
@@ -131,11 +186,22 @@ namespace MelodiasService.Implementations
 
                 return true;
             }
+            catch (FaultException ex)
+            {
+                throw new FaultException("Error de validación: " + ex.Message);
+            }
+            catch (CommunicationException)
+            {
+                throw new FaultException("Error de comunicación con el servidor. Intente más tarde.");
+            }
+            catch (TimeoutException)
+            {
+                throw new FaultException("Tiempo de espera agotado. El servidor no respondió.");
+            }
             catch (Exception ex)
             {
-                throw new FaultException("Error deleting the product: " + ex.Message);
+                throw new FaultException("Error inesperado en el servidor: " + ex.Message);
             }
         }
-
     }
 }
