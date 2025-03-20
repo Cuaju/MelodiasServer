@@ -13,75 +13,120 @@ namespace DataAccess.DAO
     {
         public bool RegisterProduct(Product product)
         {
-            using (var context = new MelodiasContext())
+            try
             {
-                bool nameExists = context.Products.Any(p => p.ProductName == product.ProductName && p.ProductId != product.ProductId);
-                if (nameExists)
+                using (var context = new MelodiasContext())
                 {
-                    throw new FaultException("A product with this name already exists.");
+                    bool nameExists = context.Products.Any(p => p.ProductName == product.ProductName && p.ProductId != product.ProductId);
+                    if (nameExists)
+                    {
+                        throw new FaultException("A product with this name already exists.");
+                    }
+
+                    if (context.Products.Any(p => p.ProductCode == product.ProductCode))
+                    {
+                        return false;
+                    }
+
+                    string nextCode = GenerateNextProductCode(context);
+                    product.ProductCode = nextCode;
+
+                    context.Products.Add(product);
+                    return context.SaveChanges() > 0;
                 }
-
-                if (context.Products.Any(p => p.ProductCode == product.ProductCode))
-                {
-                    return false;
-                }
-
-                string nextCode = GenerateNextProductCode(context);
-                product.ProductCode = nextCode;
-
-                context.Products.Add(product);
-                return context.SaveChanges() > 0;
+            }
+            catch (System.Data.SqlClient.SqlException)
+            {
+                throw new FaultException("No fue posible conectarse a la base de datos. Por favor intente más tarde.");
+            }
+            catch (InvalidOperationException)
+            {
+                throw new FaultException("Error interno al consultar la base de datos. Intente más tarde.");
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException("Error inesperado al registrar el producto: " + ex.Message);
             }
         }
 
         public List<Product> GetProducts()
         {
-            using (var context = new MelodiasContext())
+            try
             {
-                return context.Products.Where(p => p.Status).ToList();
+                using (var context = new MelodiasContext())
+                {
+                    return context.Products.Where(p => p.Status).ToList();
+                }
+            }
+            catch (System.Data.SqlClient.SqlException)
+            {
+                throw new FaultException("No fue posible conectarse a la base de datos. Por favor intente más tarde.");
+            }
+            catch (InvalidOperationException)
+            {
+                throw new FaultException("Error interno al consultar la base de datos. Intente más tarde.");
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException("Error inesperado al obtener los productos el producto: " + ex.Message);
             }
         }
 
         public bool UpdateProduct(Product product)
         {
-            using (var context = new MelodiasContext())
+            try
             {
-                var existingProduct = context.Products.FirstOrDefault(p => p.ProductId == product.ProductId);
-                if (existingProduct == null)
+                using (var context = new MelodiasContext())
                 {
-                    return false;
+                    var existingProduct = context.Products.FirstOrDefault(p => p.ProductId == product.ProductId);
+                    if (existingProduct == null)
+                    {
+                        return false;
+                    }
+
+                    if (context.Products.Any(p => p.ProductId != product.ProductId && p.ProductName.ToLower() == product.ProductName.ToLower()))
+                    {
+                        throw new FaultException("A product with this name already exists.");
+                    }
+
+                    if (existingProduct.ProductName == product.ProductName &&
+                    existingProduct.Description == product.Description &&
+                    existingProduct.PurchasePrice == product.PurchasePrice &&
+                    existingProduct.SalePrice == product.SalePrice &&
+                    existingProduct.Category == product.Category &&
+                    existingProduct.Brand == product.Brand &&
+                    existingProduct.Model == product.Model &&
+                    existingProduct.Stock == product.Stock &&
+                    existingProduct.Photo == product.Photo &&
+                    existingProduct.Status == product.Status)
+                    {
+                        return true;
+                    }
+
+                    existingProduct.ProductName = product.ProductName;
+                    existingProduct.Description = product.Description;
+                    existingProduct.PurchasePrice = product.PurchasePrice;
+                    existingProduct.SalePrice = product.SalePrice;
+                    existingProduct.Category = product.Category;
+                    existingProduct.Brand = product.Brand;
+                    existingProduct.Model = product.Model;
+                    existingProduct.Stock = product.Stock;
+                    existingProduct.Photo = product.Photo;
+
+                    return context.SaveChanges() > 0;
                 }
-
-                if (context.Products.Any(p => p.ProductId != product.ProductId && p.ProductName.ToLower() == product.ProductName.ToLower()))
-                {
-                    throw new FaultException("A product with this name already exists.");
-                }
-
-                if (existingProduct.ProductName == product.ProductName &&
-                existingProduct.Description == product.Description &&
-                existingProduct.PurchasePrice == product.PurchasePrice &&
-                existingProduct.SalePrice == product.SalePrice &&
-                existingProduct.Category == product.Category &&
-                existingProduct.Brand == product.Brand &&
-                existingProduct.Model == product.Model &&
-                existingProduct.Stock == product.Stock &&
-                existingProduct.Photo == product.Photo &&
-                existingProduct.Status == product.Status)
-                {
-                    return true;
-                }
-
-                existingProduct.ProductName = product.ProductName;
-                existingProduct.Description = product.Description;
-                existingProduct.PurchasePrice = product.PurchasePrice;
-                existingProduct.SalePrice = product.SalePrice;
-                existingProduct.Category = product.Category;
-                existingProduct.Brand = product.Brand;
-                existingProduct.Model = product.Model;
-                existingProduct.Stock = product.Stock;
-                existingProduct.Photo = product.Photo;
-
-                return context.SaveChanges() > 0;
+            }
+            catch (System.Data.SqlClient.SqlException)
+            {
+                throw new FaultException("No fue posible conectarse a la base de datos. Por favor intente más tarde.");
+            }
+            catch (InvalidOperationException)
+            {
+                throw new FaultException("Error interno al consultar la base de datos. Intente más tarde.");
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException("Error inesperado al actualizar el producto: " + ex.Message);
             }
         }
 
@@ -100,29 +145,59 @@ namespace DataAccess.DAO
 
         public bool ExistsProductByName(string productName, int productId)
         {
-            using (var context = new MelodiasContext())
+            try
             {
-                return context.Products.Any(p => p.ProductName == productName && p.ProductId != productId);
+                using (var context = new MelodiasContext())
+                {
+                    return context.Products.Any(p => p.ProductName == productName && p.ProductId != productId);
+                }
+            }
+            catch (System.Data.SqlClient.SqlException)
+            {
+                throw new FaultException("No fue posible conectarse a la base de datos. Por favor intente más tarde.");
+            }
+            catch (InvalidOperationException)
+            {
+                throw new FaultException("Error interno al consultar la base de datos. Intente más tarde.");
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException("Error inesperado al verificar el nombre del producto: " + ex.Message);
             }
         }
 
         public bool DeleteProduct(int productId)
         {
-            using (var context = new MelodiasContext())
+            try
             {
-                var product = context.Products.FirstOrDefault(p => p.ProductId == productId);
-                if (product == null)
+                using (var context = new MelodiasContext())
                 {
-                    throw new FaultException("El producto no existe.");
-                }
+                    var product = context.Products.FirstOrDefault(p => p.ProductId == productId);
+                    if (product == null)
+                    {
+                        throw new FaultException("El producto no existe.");
+                    }
 
-                if (product.HasSales)
-                {
-                    throw new FaultException("Este producto no puede ser eliminado porque ya ha sido registrado en ventas.");
-                }
+                    if (product.HasSales)
+                    {
+                        throw new FaultException("Este producto no puede ser eliminado porque ya ha sido registrado en ventas.");
+                    }
 
-                product.Status = false;
-                return context.SaveChanges() > 0;
+                    product.Status = false;
+                    return context.SaveChanges() > 0;
+                }
+            }
+            catch (System.Data.SqlClient.SqlException)
+            {
+                throw new FaultException("No fue posible conectarse a la base de datos. Por favor intente más tarde.");
+            }
+            catch (InvalidOperationException)
+            {
+                throw new FaultException("Error interno al consultar la base de datos. Intente más tarde.");
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException("Error inesperado al eliminar el producto: " + ex.Message);
             }
         }
     }
