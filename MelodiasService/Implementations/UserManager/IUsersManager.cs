@@ -23,6 +23,15 @@ namespace MelodiasService
 
         [OperationContract]
         int GetIdEmployeeByUserName(string userName);
+
+        [OperationContract]
+        bool UserNameExist(string userName);
+
+        [OperationContract]
+        bool MailAlreadyExist(string mail);
+
+        [OperationContract]
+        bool PhoneNumberExists(int number);
     }
     [DataContract]
     public class EmployeeDataContract
