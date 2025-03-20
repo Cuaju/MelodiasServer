@@ -67,7 +67,45 @@ namespace MelodiasService.Implementations
                 return false;
         }
 
+        public bool MailAlreadyExist(string mail)
+        {
+            EmployeeDao employeeDao = new EmployeeDao();
+            try
+            {
+                return employeeDao.ExistMail(mail);
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
 
+        public bool PhoneNumberExists(int number)
+        {
+            try
+            {
+                EmployeeDao employeeDao = new EmployeeDao();
+                return employeeDao.ExistPhoneNumber(number);
 
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+
+        }
+
+        public bool UserNameExist(string userName)
+        {
+            try
+            {
+                EmployeeDao employeeDao= new EmployeeDao();
+                return employeeDao.ExistUserName(userName); 
+
+            }catch (Exception)
+            {
+                return false;
+            }
+        }
     }
 }

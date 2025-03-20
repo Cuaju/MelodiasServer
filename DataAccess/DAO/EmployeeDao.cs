@@ -37,6 +37,75 @@ namespace DataAccess.DAO
             }
         }
 
+        public bool ExistPhoneNumber(int number)
+        {
+            try
+            {
+                using (var context = new MelodiasContext())
+                {
+                    return context.Employees.Any(x => x.Phone == number);
+                }
+            }
+            catch (SqlException ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            catch (EntityException ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public bool ExistMail(string mail)
+        {
+            try
+            {
+                using (var context = new MelodiasContext())
+                {
+                    return context.Employees.Any(x => x.Email == mail);
+                }
+            }
+            catch (SqlException ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            catch (EntityException ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public bool ExistUserName(string userName)
+        {
+            try
+            {
+                using (var context = new MelodiasContext())
+                {
+                    return context.Employees.Any(x => x.UserName == userName);
+                }
+            }
+            catch (SqlException ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            catch (EntityException ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
 
         public bool UpdateEmployee(Employee employee)
         {
