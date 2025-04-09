@@ -58,6 +58,7 @@
   <ItemGroup>
     <Compile Include="DAO\EmployeeDao.cs" />
     <Compile Include="DAO\ProductDao.cs" />
+    <Compile Include="DAO\SaleDao.cs" />
     <Compile Include="DAO\SupplierDao.cs" />
     <Compile Include="MelodiasContext.cs" />
     <Compile Include="Migrations\202503151941320_InitialCreate.cs" />
@@ -80,9 +81,15 @@
     <Compile Include="Migrations\202503190149159_NewAtributeHasSales.Designer.cs">
       <DependentUpon>202503190149159_NewAtributeHasSales.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202504090521066_addSaleAndDetails.cs" />
+    <Compile Include="Migrations\202504090521066_addSaleAndDetails.Designer.cs">
+      <DependentUpon>202504090521066_addSaleAndDetails.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Employee.cs" />
     <Compile Include="Models\Product.cs" />
+    <Compile Include="Models\Sale.cs" />
+    <Compile Include="Models\SaleDetail.cs" />
     <Compile Include="Models\Supplier.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -105,6 +112,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202503190149159_NewAtributeHasSales.resx">
       <DependentUpon>202503190149159_NewAtributeHasSales.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202504090521066_addSaleAndDetails.resx">
+      <DependentUpon>202504090521066_addSaleAndDetails.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
