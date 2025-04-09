@@ -200,5 +200,27 @@ namespace DataAccess.DAO
                 throw new FaultException("Error inesperado al eliminar el producto: " + ex.Message);
             }
         }
+
+        public List<Product> SearchProducts(string name, string code, string category, string brand)
+        {
+            using (var context = new MelodiasContext())
+            {
+                var query = context.Products.Where(p => p.Status);
+
+                if (!string.IsNullOrWhiteSpace(name))
+                    query = query.Where(p => p.ProductName.Contains(name));
+
+                if (!string.IsNullOrWhiteSpace(code))
+                    query = query.Where(p => p.ProductCode.Contains(code));
+
+                if (!string.IsNullOrWhiteSpace(category) && category != "Seleccionar")
+                    query = query.Where(p => p.Category == category);
+
+                if (!string.IsNullOrWhiteSpace(brand) && brand != "Seleccionar")
+                    query = query.Where(p => p.Brand == brand);
+
+                return query.ToList();
+            }
+        }
     }
 }

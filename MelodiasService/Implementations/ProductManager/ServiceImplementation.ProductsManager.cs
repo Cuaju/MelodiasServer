@@ -203,5 +203,36 @@ namespace MelodiasService.Implementations
                 throw new FaultException("Error inesperado en el servidor: " + ex.Message);
             }
         }
+
+        public List<ProductDataContract> SearchProducts(string name, string code, string category, string brand)
+        {
+            try
+            {
+                var products = productDao.SearchProducts(name, code, category, brand);
+
+                if (products == null || products.Count == 0)
+                    throw new FaultException("No existe un producto con esas especificaciones.");
+
+                return products.Select(p => new ProductDataContract
+                {
+                    ProductId = p.ProductId,
+                    ProductName = p.ProductName,
+                    ProductCode = p.ProductCode,
+                    Description = p.Description,
+                    PurchasePrice = p.PurchasePrice,
+                    SalePrice = p.SalePrice,
+                    Category = p.Category,
+                    Brand = p.Brand,
+                    Model = p.Model,
+                    Stock = p.Stock,
+                    Photo = p.Photo,
+                    Status = p.Status
+                }).ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException("Error buscando los productos: " + ex.Message);
+            }
+        }
     }
 }

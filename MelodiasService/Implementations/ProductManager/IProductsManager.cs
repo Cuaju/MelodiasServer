@@ -25,6 +25,9 @@ namespace MelodiasService
 
         [OperationContract]
         bool DeleteProduct(int productId);
+
+        [OperationContract]
+        List<ProductDataContract> SearchProducts(string name, string code, string category, string brand);
     }
 
     [DataContract]
