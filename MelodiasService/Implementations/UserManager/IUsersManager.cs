@@ -32,6 +32,9 @@ namespace MelodiasService
 
         [OperationContract]
         bool PhoneNumberExists(int number);
+
+        [OperationContract]
+        EmployeeDataContract GetEmployeeDetailsWithoutPassword(int idEmployee);
     }
     [DataContract]
     public class EmployeeDataContract
