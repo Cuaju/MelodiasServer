@@ -1,4 +1,5 @@
-﻿using DataAccess.DAO;
+﻿using DataAccess;
+using DataAccess.DAO;
 using DataAccess.Models;
 using System;
 using System.Collections.Generic;
@@ -158,6 +159,35 @@ namespace MelodiasService.Implementations
                 throw new FaultException("Error inesperado en el servidor: " + ex.Message);
             }
         }
+        public List<SaleDataContract> GetSales(string customerName, DateTime? date)
+        {
+            try
+            {
+                var sales = saleDao.GetSales(customerName, date);
+
+                return sales.Select(s => new SaleDataContract
+                {
+                    SaleId = s.SaleId,
+                    SaleDate = s.SaleDate,
+                    CustomerName = s.CustomerName,
+                    IsCancelled = s.IsCancelled,
+                    SaleDetails = s.SaleDetails.Select(d => new SaleDetailDataContract
+                    {
+                        ProductId = d.ProductId,
+                        ProductName = d.Product?.ProductName ?? "",
+                        Quantity = d.Quantity,
+                        UnitPrice = d.UnitPrice
+                    }).ToList()
+                }).ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException("Error al recuperar las ventas: " + ex.Message);
+            }
+        }
+
+
+
 
     }
 }

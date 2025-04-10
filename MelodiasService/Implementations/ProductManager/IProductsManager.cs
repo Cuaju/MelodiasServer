@@ -37,7 +37,7 @@ namespace MelodiasService
         public string ProductName { get; set; }
 
         [DataMember]
-        public string ProductCode{ get; set; }
+        public string ProductCode { get; set; }
 
         [DataMember]
         public string Description { get; set; }

@@ -144,5 +144,34 @@ namespace DataAccess.DAO
                 throw new FaultException("Error al buscar la venta: " + ex.Message);
             }
         }
+        public List<Sale> GetSales(string customerName = null, DateTime? date = null)
+        {
+            try
+            {
+                using (var context = new MelodiasContext())
+                {
+                    var query = context.Sales
+                        .Include(s => s.SaleDetails.Select(d => d.Product))
+                        .AsQueryable();
+
+                    if (!string.IsNullOrWhiteSpace(customerName))
+                    {
+                        query = query.Where(s => s.CustomerName.Contains(customerName));
+                    }
+
+                    if (date.HasValue)
+                    {
+                        query = query.Where(s => DbFunctions.TruncateTime(s.SaleDate) == DbFunctions.TruncateTime(date.Value));
+                    }
+
+                    return query.ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException("Error al recuperar las ventas: " + ex.Message);
+            }
+        }
+
     }
 }

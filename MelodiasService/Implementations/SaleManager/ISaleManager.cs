@@ -9,6 +9,10 @@ namespace MelodiasService
     public interface ISalesManager
     {
         [OperationContract]
+        List<SaleDataContract> GetSales(string customerName, DateTime? date);
+
+
+        [OperationContract]
         bool RegisterSale(SaleDataContract sale);
 
         [OperationContract]
@@ -58,7 +62,8 @@ namespace MelodiasService
         [DataMember]
         public int Quantity { get; set; }
 
+        
         [DataMember]
-        public decimal Subtotal => UnitPrice * Quantity;
+        public decimal Subtotal { get; set; }
     }
 }
