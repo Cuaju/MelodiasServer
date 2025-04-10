@@ -9,8 +9,60 @@ using System.Threading.Tasks;
 
 namespace DataAccess.DAO
 {
+    public class ProductData
+    {
+        public int ProductId { get; set; }
+        public string ProductName { get; set; }
+        public string ProductCode { get; set; }
+        public string Description { get; set; }
+        public decimal PurchasePrice { get; set; }
+        public decimal SalePrice { get; set; }
+        public string Category { get; set; }
+        public string Brand { get; set; }
+        public string Model { get; set; }
+        public int Stock { get; set; }
+        public string Photo { get; set; }
+        public bool Status { get; set; }
+        public bool HasSales { get; set; }
+    }
+
     public class ProductDao
     {
+        public List<ProductData> GetProductsList(string searchTerm)
+        {
+            using (var context = new MelodiasContext())
+            {
+                var normalizedSearchTerm = searchTerm.Trim().ToLower();
+
+                var products = context.Products
+                    .Where(p => p.ProductName.ToLower().Contains(normalizedSearchTerm) ||
+                                p.ProductCode.ToLower().Contains(normalizedSearchTerm) ||
+                                (p.Description != null && p.Description.ToLower().Contains(normalizedSearchTerm)))
+                    .Take(10)
+                    .ToList();
+
+                var productDataList = products.Select(p => new ProductData
+                {
+                    ProductId = p.ProductId,
+                    ProductName = p.ProductName,
+                    ProductCode = p.ProductCode,
+                    Description = p.Description,
+                    PurchasePrice = p.PurchasePrice,
+                    SalePrice = p.SalePrice,
+                    Category = p.Category,
+                    Brand = p.Brand,
+                    Model = p.Model,
+                    Stock = p.Stock,
+                    Photo = p.Photo,
+                    Status = p.Status,
+                    HasSales = p.HasSales
+                }).ToList();
+
+                return productDataList;
+            }
+        }
+
+
         public bool RegisterProduct(Product product)
         {
             try

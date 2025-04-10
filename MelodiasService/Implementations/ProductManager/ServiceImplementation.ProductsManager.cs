@@ -234,5 +234,36 @@ namespace MelodiasService.Implementations
                 throw new FaultException("Error buscando los productos: " + ex.Message);
             }
         }
+
+        public List<ProductDataContract> GetProductsSearch(string searchCriteria)
+        {
+            try
+            {
+                List<ProductData> productDataList = new ProductDao().GetProductsList(searchCriteria);
+                var productsList = new List<ProductDataContract>();
+
+                foreach (ProductData product in productDataList)
+                {
+                    productsList.Add((ProductDataContract)product);
+                }
+                return productsList;
+            }
+            catch (CommunicationException e)
+            {
+                Console.WriteLine(e.Message);
+                Console.WriteLine(e.StackTrace);
+            }
+            catch (TimeoutException e)
+            {
+                Console.WriteLine(e.Message);
+                Console.WriteLine(e.StackTrace);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                Console.WriteLine(e.StackTrace);
+            }
+            return null;
+        }
     }
 }
