@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DataAccess.DAO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -16,6 +17,9 @@ namespace MelodiasService
 
         [OperationContract]
         List<ProductDataContract> GetProducts();
+        
+        [OperationContract]
+        List<ProductDataContract> GetProductsSearch(string search);
 
         [OperationContract]
         bool EditProduct(ProductDataContract product);
@@ -71,5 +75,32 @@ namespace MelodiasService
 
         [DataMember]
         public bool HasSales { get; set; }
+
+
+        public static explicit operator ProductDataContract(ProductData productData)
+        {
+            if (productData == null)
+            {
+                throw new ArgumentNullException(nameof(productData));
+            }
+
+            return new ProductDataContract
+            {
+                ProductId = productData.ProductId,
+                ProductName = productData.ProductName,
+                ProductCode = productData.ProductCode,
+                Description = productData.Description,
+                PurchasePrice = productData.PurchasePrice,
+                SalePrice = productData.SalePrice,
+                Category = productData.Category,
+                Brand = productData.Brand,
+                Model = productData.Model,
+                Stock = productData.Stock,
+                Photo = productData.Photo,
+                Status = productData.Status,
+                HasSales = productData.HasSales
+            };
+        }
+
     }
 }

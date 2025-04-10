@@ -1,4 +1,5 @@
 ﻿using DataAccess.DAO;
+using DataAccess.Models;
 using MelodiasService.DTOs;
 using System;
 using System.Collections.Generic;
@@ -126,6 +127,37 @@ namespace MelodiasService.Implementations
             try
             {
                 return new SupplierDao().IsSupplierNameTaken(name);
+            }
+            catch (CommunicationException e)
+            {
+                Console.WriteLine(e.Message);
+                Console.WriteLine(e.StackTrace);
+            }
+            catch (TimeoutException e)
+            {
+                Console.WriteLine(e.Message);
+                Console.WriteLine(e.StackTrace);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                Console.WriteLine(e.StackTrace);
+            }
+            return false;
+        }
+
+        public bool RegisterPurchase(PurchaseDTO purchase)
+        {
+            var purchaseDao = new Purchase();
+            purchaseDao.ProductId = purchase.ProductId;
+            purchaseDao.SupplierId = purchase.SupplierId;
+            purchaseDao.TotalCost = purchase.TotalCost;
+            purchaseDao.PurchaseDate = purchase.PurchaseDate;
+            
+
+            try
+            {
+                return new PurchaseDao().RegisterPurchase(purchaseDao);
             }
             catch (CommunicationException e)
             {
