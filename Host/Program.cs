@@ -1,22 +1,38 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.ServiceModel;
-using System.Text;
-using System.Threading.Tasks;
 using MelodiasService.Implementations;
 
 namespace Host
 {
-    internal class Program
+    class Program
     {
         static void Main(string[] args)
         {
-            using (var host = new ServiceHost(typeof(ServiceImplementation)))
+            using (ServiceHost host = new ServiceHost(typeof(ServiceImplementation)))
             {
-                host.Open();
-                Console.WriteLine("Service is running...");
-                Console.ReadLine();
+                try
+                {
+                    host.Open();
+
+                    Console.WriteLine("🟢 Servicio ejecutándose en los siguientes endpoints:\n");
+
+                    foreach (var endpoint in host.Description.Endpoints)
+                    {
+                        Console.WriteLine($"➡️  Contrato: {endpoint.Contract.Name}");
+                        Console.WriteLine($"    Dirección: {endpoint.Address.Uri}");
+                        Console.WriteLine($"    Binding: {endpoint.Binding.Name}");
+                        Console.WriteLine();
+                    }
+
+                    Console.WriteLine("Presiona ENTER para cerrar el servicio...");
+                    Console.ReadLine();
+
+                    host.Close();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"❌ Error al iniciar el servicio: {ex.Message}");
+                }
             }
         }
     }

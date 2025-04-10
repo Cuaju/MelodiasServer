@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MelodiasService.Implementations
+﻿namespace MelodiasService.Implementations
 {
-    public partial class ServiceImplementation
+    public partial class ServiceImplementation :
+        IUsersManager,
+        IProductsManager,
+        ISuppliersManager,
+        ISalesManager
     {
+        // Este partial puede quedar vacío si los métodos están en otros .cs
     }
 }

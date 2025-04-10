@@ -59,6 +59,7 @@
     <Compile Include="DAO\EmployeeDao.cs" />
     <Compile Include="DAO\ProductDao.cs" />
     <Compile Include="DAO\SaleDao.cs" />
+    <Compile Include="DAO\SaleDetailDao.cs" />
     <Compile Include="DAO\SupplierDao.cs" />
     <Compile Include="MelodiasContext.cs" />
     <Compile Include="Migrations\202503151941320_InitialCreate.cs" />
