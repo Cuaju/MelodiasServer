@@ -74,13 +74,9 @@ namespace DataAccess
             modelBuilder.Entity<SaleDetail>()
                 .HasRequired(sd => sd.Product)
                 .WithMany()
-                  .HasForeignKey(sd => sd.ProductId)
-                .WillCascadeOnDelete(false); // Evita borrar producto si se elimina detalle
-                        .Property(s => s.Email)
-                        .HasColumnAnnotation(
-                            IndexAnnotation.AnnotationName,
-                            new IndexAnnotation(new IndexAttribute("IX_SupplierCompanyEmail") { IsUnique = true }));
-            
+                .HasForeignKey(sd => sd.ProductId)
+                .WillCascadeOnDelete(false);
+
             modelBuilder.Entity<Purchase>().ToTable("Purchases");
             modelBuilder.Entity<Purchase>()
                 .Property(p => p.TotalCost)

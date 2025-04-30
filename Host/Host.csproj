@@ -62,10 +62,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DataAccess\DataAccess.csproj">
-      <Project>{957dd9ff-e63a-4521-85f8-345c990e4a13}</Project>
-      <Name>DataAccess</Name>
-    </ProjectReference>
     <ProjectReference Include="..\MelodiasService\MelodiasService.csproj">
       <Project>{69A6BB9C-3144-4708-8AF3-23A1B3B9BF19}</Project>
       <Name>MelodiasService</Name>
