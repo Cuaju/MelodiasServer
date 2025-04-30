@@ -122,6 +122,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202504090521066_addSaleAndDetails.resx">
       <DependentUpon>202504090521066_addSaleAndDetails.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202504100256513_PurchaseTable.resx">
       <DependentUpon>202504100256513_PurchaseTable.cs</DependentUpon>
     </EmbeddedResource>
