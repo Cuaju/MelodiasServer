@@ -86,6 +86,7 @@
     <Compile Include="Migrations\202504090521066_addSaleAndDetails.cs" />
     <Compile Include="Migrations\202504090521066_addSaleAndDetails.Designer.cs">
       <DependentUpon>202504090521066_addSaleAndDetails.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\202504100256513_PurchaseTable.cs" />
     <Compile Include="Migrations\202504100256513_PurchaseTable.Designer.cs">
       <DependentUpon>202504100256513_PurchaseTable.cs</DependentUpon>
