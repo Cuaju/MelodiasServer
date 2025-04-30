@@ -37,6 +37,39 @@ namespace DataAccess.DAO
             }
         }
 
+        public Employee GetEmployeeWithoutPasswordById(int id)
+        {
+            try
+            {
+                using (var context = new MelodiasContext())
+                {
+                    // Evitamos el conflicto de nombre usando otro identificador
+                    var employeeEntity = context.Employees.FirstOrDefault(e => e.Id == id);
+
+                    if (employeeEntity == null)
+                        return null;
+
+                    return new Employee
+                    {
+                        Id = employeeEntity.Id,
+                        UserName = employeeEntity.UserName,
+                        Name = employeeEntity.Name,
+                        Surnames = employeeEntity.Surnames,
+                        ZipCode = employeeEntity.ZipCode,
+                        City = employeeEntity.City,
+                        Address = employeeEntity.Address,
+                        Email = employeeEntity.Email,
+                        Phone = employeeEntity.Phone
+                    };
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+
         public bool ExistPhoneNumber(int number)
         {
             try

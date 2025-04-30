@@ -28,5 +28,8 @@ namespace MelodiasService
 
         [OperationContract]
         bool DeleteSupplier(int supplierId);
+
+        [OperationContract]
+        bool RegisterPurchase(PurchaseDTO purchase);
     }
 }

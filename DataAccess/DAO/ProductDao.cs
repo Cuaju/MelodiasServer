@@ -9,8 +9,60 @@ using System.Threading.Tasks;
 
 namespace DataAccess.DAO
 {
+    public class ProductData
+    {
+        public int ProductId { get; set; }
+        public string ProductName { get; set; }
+        public string ProductCode { get; set; }
+        public string Description { get; set; }
+        public decimal PurchasePrice { get; set; }
+        public decimal SalePrice { get; set; }
+        public string Category { get; set; }
+        public string Brand { get; set; }
+        public string Model { get; set; }
+        public int Stock { get; set; }
+        public string Photo { get; set; }
+        public bool Status { get; set; }
+        public bool HasSales { get; set; }
+    }
+
     public class ProductDao
     {
+        public List<ProductData> GetProductsList(string searchTerm)
+        {
+            using (var context = new MelodiasContext())
+            {
+                var normalizedSearchTerm = searchTerm.Trim().ToLower();
+
+                var products = context.Products
+                    .Where(p => p.ProductName.ToLower().Contains(normalizedSearchTerm) ||
+                                p.ProductCode.ToLower().Contains(normalizedSearchTerm) ||
+                                (p.Description != null && p.Description.ToLower().Contains(normalizedSearchTerm)))
+                    .Take(10)
+                    .ToList();
+
+                var productDataList = products.Select(p => new ProductData
+                {
+                    ProductId = p.ProductId,
+                    ProductName = p.ProductName,
+                    ProductCode = p.ProductCode,
+                    Description = p.Description,
+                    PurchasePrice = p.PurchasePrice,
+                    SalePrice = p.SalePrice,
+                    Category = p.Category,
+                    Brand = p.Brand,
+                    Model = p.Model,
+                    Stock = p.Stock,
+                    Photo = p.Photo,
+                    Status = p.Status,
+                    HasSales = p.HasSales
+                }).ToList();
+
+                return productDataList;
+            }
+        }
+
+
         public bool RegisterProduct(Product product)
         {
             try
@@ -198,6 +250,28 @@ namespace DataAccess.DAO
             catch (Exception ex)
             {
                 throw new FaultException("Error inesperado al eliminar el producto: " + ex.Message);
+            }
+        }
+
+        public List<Product> SearchProducts(string name, string code, string category, string brand)
+        {
+            using (var context = new MelodiasContext())
+            {
+                var query = context.Products.Where(p => p.Status);
+
+                if (!string.IsNullOrWhiteSpace(name))
+                    query = query.Where(p => p.ProductName.Contains(name));
+
+                if (!string.IsNullOrWhiteSpace(code))
+                    query = query.Where(p => p.ProductCode.Contains(code));
+
+                if (!string.IsNullOrWhiteSpace(category) && category != "Seleccionar")
+                    query = query.Where(p => p.Category == category);
+
+                if (!string.IsNullOrWhiteSpace(brand) && brand != "Seleccionar")
+                    query = query.Where(p => p.Brand == brand);
+
+                return query.ToList();
             }
         }
     }
