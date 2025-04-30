@@ -58,6 +58,8 @@
   <ItemGroup>
     <Compile Include="DAO\EmployeeDao.cs" />
     <Compile Include="DAO\ProductDao.cs" />
+    <Compile Include="DAO\SaleDao.cs" />
+    <Compile Include="DAO\SaleDetailDao.cs" />
     <Compile Include="DAO\PurchaseDao.cs" />
     <Compile Include="DAO\SupplierDao.cs" />
     <Compile Include="MelodiasContext.cs" />
@@ -81,6 +83,9 @@
     <Compile Include="Migrations\202503190149159_NewAtributeHasSales.Designer.cs">
       <DependentUpon>202503190149159_NewAtributeHasSales.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202504090521066_addSaleAndDetails.cs" />
+    <Compile Include="Migrations\202504090521066_addSaleAndDetails.Designer.cs">
+      <DependentUpon>202504090521066_addSaleAndDetails.cs</DependentUpon>
     <Compile Include="Migrations\202504100256513_PurchaseTable.cs" />
     <Compile Include="Migrations\202504100256513_PurchaseTable.Designer.cs">
       <DependentUpon>202504100256513_PurchaseTable.cs</DependentUpon>
@@ -88,6 +93,8 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Employee.cs" />
     <Compile Include="Models\Product.cs" />
+    <Compile Include="Models\Sale.cs" />
+    <Compile Include="Models\SaleDetail.cs" />
     <Compile Include="Models\Purchase.cs" />
     <Compile Include="Models\Supplier.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -112,6 +119,8 @@
     <EmbeddedResource Include="Migrations\202503190149159_NewAtributeHasSales.resx">
       <DependentUpon>202503190149159_NewAtributeHasSales.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202504090521066_addSaleAndDetails.resx">
+      <DependentUpon>202504090521066_addSaleAndDetails.cs</DependentUpon>
     <EmbeddedResource Include="Migrations\202504100256513_PurchaseTable.resx">
       <DependentUpon>202504100256513_PurchaseTable.cs</DependentUpon>
     </EmbeddedResource>
