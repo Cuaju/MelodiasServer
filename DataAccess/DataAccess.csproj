@@ -43,6 +43,7 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.5.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -91,6 +92,10 @@
     <Compile Include="Migrations\202504100256513_PurchaseTable.Designer.cs">
       <DependentUpon>202504100256513_PurchaseTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202505040408264_InitialBaseline.cs" />
+    <Compile Include="Migrations\202505040408264_InitialBaseline.Designer.cs">
+      <DependentUpon>202505040408264_InitialBaseline.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Employee.cs" />
     <Compile Include="Models\Product.cs" />
@@ -125,6 +130,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202504100256513_PurchaseTable.resx">
       <DependentUpon>202504100256513_PurchaseTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202505040408264_InitialBaseline.resx">
+      <DependentUpon>202505040408264_InitialBaseline.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
