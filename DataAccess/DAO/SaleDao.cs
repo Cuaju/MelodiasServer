@@ -173,5 +173,46 @@ namespace DataAccess.DAO
             }
         }
 
+        public List<SalesByCategoryReport> GetSalesByCategoryReport(DateTime startDate, DateTime endDate)
+        {
+            try
+            {
+                using (var context = new MelodiasContext())
+                {
+                    var sales = context.Sales
+                        .Include(s => s.SaleDetails.Select(d => d.Product))
+                        .Where(s => DbFunctions.TruncateTime(s.SaleDate) >= DbFunctions.TruncateTime(startDate)
+                                 && DbFunctions.TruncateTime(s.SaleDate) <= DbFunctions.TruncateTime(endDate)
+                                 && !s.IsCancelled)
+                        .ToList();
+
+                    decimal totalRevenueGlobal = sales
+                        .SelectMany(s => s.SaleDetails)
+                        .Sum(d => d.Quantity * d.UnitPrice);
+
+                    var grouped = sales
+                        .SelectMany(s => s.SaleDetails)
+                        .GroupBy(d => d.Product.Category)
+                        .Select(g => new SalesByCategoryReport
+                        {
+                            Category = g.Key,
+                            QuantitySold = g.Sum(x => x.Quantity),
+                            SalesCount = g.Select(x => x.SaleId).Distinct().Count(),
+                            TotalRevenue = g.Sum(x => x.Quantity * x.UnitPrice),
+                            Percentage = totalRevenueGlobal > 0 ?
+                                (double)(g.Sum(x => x.Quantity * x.UnitPrice) / totalRevenueGlobal) * 100 : 0,
+                            TopProduct = g.GroupBy(x => x.Product.ProductName)
+                                          .OrderByDescending(x => x.Sum(y => y.Quantity))
+                                          .FirstOrDefault().Key
+                        }).ToList();
+
+                    return grouped;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException("Error al generar el reporte de ventas: " + ex.Message);
+            }
+        }
     }
 }

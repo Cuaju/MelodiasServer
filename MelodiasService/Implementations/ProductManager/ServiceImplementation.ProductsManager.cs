@@ -265,5 +265,23 @@ namespace MelodiasService.Implementations
             }
             return null;
         }
+
+        public List<SalesByCategoryReport> GetSalesByCategoryReport(DateTime startDate, DateTime endDate)
+        {
+            try
+            {
+                var dao = new SaleDao();
+                var report = dao.GetSalesByCategoryReport(startDate, endDate);
+
+                if (report == null || report.Count == 0)
+                    throw new FaultException("No hay datos de ventas en el periodo seleccionado.");
+
+                return report;
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException("Error al recuperar el reporte: " + ex.Message);
+            }
+        }
     }
 }
