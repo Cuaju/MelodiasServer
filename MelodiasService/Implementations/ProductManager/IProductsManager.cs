@@ -1,4 +1,5 @@
 ﻿using DataAccess.DAO;
+using DataAccess.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,6 +33,9 @@ namespace MelodiasService
 
         [OperationContract]
         List<ProductDataContract> SearchProducts(string name, string code, string category, string brand);
+
+        [OperationContract]
+        List<SalesByCategoryReport> GetSalesByCategoryReport(DateTime startDate, DateTime endDate);
     }
 
     [DataContract]
