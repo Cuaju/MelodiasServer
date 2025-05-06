@@ -36,6 +36,9 @@ namespace MelodiasService
 
         [OperationContract]
         List<SalesByCategoryReport> GetSalesByCategoryReport(DateTime startDate, DateTime endDate);
+
+        [OperationContract]
+        List<SalesByProductReport> GetSalesByProductReport(DateTime startDate, DateTime endDate);
     }
 
     [DataContract]
