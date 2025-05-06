@@ -12,6 +12,24 @@ namespace MelodiasService.Implementations
     {
         private SaleDao saleDao = new SaleDao();
 
+        public EarningsReport GetEarningsReport(DateTime startDate, DateTime endDate)
+        {
+            try
+            {
+                var dao = new SaleDao();
+                var report = dao.GetEarningsReport(startDate, endDate);
+
+                if (report == null)
+                    throw new FaultException("No se pudo generar el reporte de ganancias.");
+
+                return report;
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException("Error al recuperar el reporte de ganancias: " + ex.Message);
+            }
+        }
+
         public bool RegisterSale(SaleDataContract saleDC)
         {
             try
