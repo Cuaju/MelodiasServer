@@ -248,6 +248,43 @@ namespace DataAccess.DAO
                 throw new FaultException("Error al generar el reporte de ventas: " + ex.Message);
             }
         }
+
+        public List<SalesByProductReport> GetSalesByProductReport(DateTime startDate, DateTime endDate)
+        {
+            try
+            {
+                using (var context = new MelodiasContext())
+                {
+                    var sales = context.Sales
+                        .Include(s => s.SaleDetails.Select(d => d.Product))
+                        .Where(s =>
+                            DbFunctions.TruncateTime(s.SaleDate) >= DbFunctions.TruncateTime(startDate) &&
+                            DbFunctions.TruncateTime(s.SaleDate) <= DbFunctions.TruncateTime(endDate) &&
+                            !s.IsCancelled
+                        )
+                        .ToList();
+
+                    var report = sales
+                        .SelectMany(s => s.SaleDetails)
+                        .GroupBy(d => new { d.Product.ProductId, d.Product.ProductName })
+                        .Select(g => new SalesByProductReport
+                        {
+                            ProductName = g.Key.ProductName,
+                            QuantitySold = g.Sum(x => x.Quantity),
+                            SalesCount = g.Select(x => x.SaleId).Distinct().Count(),
+                            UnitPrice = g.First().UnitPrice,                       
+                            TotalRevenue = g.Sum(x => x.Quantity * x.UnitPrice)
+                        })
+                        .ToList();
+
+                    return report;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException("Error al generar el reporte de ventas por producto: " + ex.Message);
+            }
+        }
     }
 
 

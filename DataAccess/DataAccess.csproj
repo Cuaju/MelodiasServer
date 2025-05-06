@@ -103,6 +103,7 @@
     <Compile Include="Models\SaleDetail.cs" />
     <Compile Include="Models\Purchase.cs" />
     <Compile Include="Models\SalesByCategoryReport.cs" />
+    <Compile Include="Models\SalesByProductReport.cs" />
     <Compile Include="Models\Supplier.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
