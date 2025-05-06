@@ -36,6 +36,36 @@ namespace MelodiasService.Implementations
                 throw new Exception(ex.Message);
             }
         }
+
+        public bool EditEmployee(int idEmployee, EmployeeDataContract updatedEmployee)
+        {
+            try
+            {
+                EmployeeDao employeeDao = new EmployeeDao();
+
+                Employee employeeToUpdate = new Employee
+                {
+                    Id = idEmployee, 
+                    UserName = updatedEmployee.userName,
+                    Name = updatedEmployee.name,
+                    Surnames = updatedEmployee.surnames,
+                    ZipCode = updatedEmployee.zipCode,
+                    City = updatedEmployee.city,
+                    Address = updatedEmployee.address,
+                    Email = updatedEmployee.mail,
+                    Phone = updatedEmployee.phone,
+                    Password = updatedEmployee.password
+                };
+
+                return employeeDao.UpdateEmployee(employeeToUpdate);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error al editar el empleado: {ex.Message}");
+            }
+        }
+
+
         public EmployeeDataContract  GetEmployeeDetailsWithoutPassword(int idEmployee)
         {
             try
@@ -57,17 +87,7 @@ namespace MelodiasService.Implementations
                         phone = employee.Phone
                         
                     };
-                    Console.WriteLine("el nombre del empleado es "+employeeDataContract.name);
-                    Console.WriteLine("el userName del empleado es " + employeeDataContract.userName);
-                    Console.WriteLine("el surnames del empleado es " + employeeDataContract.surnames);
-                    Console.WriteLine("el zipCode del empleado es " + employeeDataContract.zipCode);
-                    Console.WriteLine("el city del empleado es " + employeeDataContract.city);
-                    Console.WriteLine("el address del empleado es " + employeeDataContract.address);
-                    Console.WriteLine("el mail del empleado es " + employeeDataContract.mail);
-                    Console.WriteLine("el phone del empleado es " + employeeDataContract.phone);
-
-
-                    Console.WriteLine("el nombre del empleado es " + employeeDataContract.name);
+                
                     return employeeDataContract;
                 }
                 else

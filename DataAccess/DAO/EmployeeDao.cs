@@ -36,14 +36,62 @@ namespace DataAccess.DAO
 
             }
         }
+        public bool UpdateEmployee(Employee employee)
+        {
+            using (var context = new MelodiasContext())
+            {
+                try
+                {
+                    var existingEmployee = context.Employees.Find(employee.Id);
+                    if (existingEmployee == null)
+                    {
+                        return false;
+                    }
+                    existingEmployee.UserName = employee.UserName;
+                    existingEmployee.Name = employee.Name;
+                    existingEmployee.Surnames = employee.Surnames;
+                    existingEmployee.ZipCode = employee.ZipCode;
+                    existingEmployee.City = employee.City;
+                    existingEmployee.Address = employee.Address;
+                    existingEmployee.Email = employee.Email;
+                    existingEmployee.Phone = employee.Phone;
+                    existingEmployee.Password = employee.Password;
 
+                    int affectedRows = context.SaveChanges();
+                    return affectedRows > 0;
+                }
+                catch (EntityException ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    throw new Exception(ex.Message);
+                }
+                catch (SqlException ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    throw new Exception(ex.Message);
+                }
+            }
+        }
+        public Employee GetEmployeeByUserName(string userName)
+        {
+            try
+            {
+                using (var context = new MelodiasContext())
+                {
+                    return context.Employees.FirstOrDefault(e => e.UserName == userName);
+                }
+            }
+            catch (EntityException ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
         public Employee GetEmployeeWithoutPasswordById(int id)
         {
             try
             {
                 using (var context = new MelodiasContext())
                 {
-                    // Evitamos el conflicto de nombre usando otro identificador
                     var employeeEntity = context.Employees.FirstOrDefault(e => e.Id == id);
 
                     if (employeeEntity == null)
@@ -140,58 +188,8 @@ namespace DataAccess.DAO
         }
 
 
-        public bool UpdateEmployee(Employee employee)
-        {
-            using (var context = new MelodiasContext())
-            {
-                try
-                {
-                    var existingEmployee = context.Employees.Find(employee.Id);
-                    if (existingEmployee == null)
-                    {
-                        return false; 
-                    }
-                    existingEmployee.UserName = employee.UserName;
-                    existingEmployee.Name = employee.Name;
-                    existingEmployee.Surnames = employee.Surnames;
-                    existingEmployee.ZipCode = employee.ZipCode;
-                    existingEmployee.City = employee.City;
-                    existingEmployee.Address = employee.Address;
-                    existingEmployee.Email = employee.Email;
-                    existingEmployee.Phone = employee.Phone;
-                    existingEmployee.Password = employee.Password;
-
-                    int affectedRows = context.SaveChanges();
-                    return affectedRows > 0;
-                }
-                catch (EntityException ex)
-                {
-                    Console.WriteLine(ex.Message);
-                    throw new Exception(ex.Message);
-                }
-                catch (SqlException ex)
-                {
-                    Console.WriteLine(ex.Message);
-                    throw new Exception(ex.Message);
-                }
-            }
-        }
-
-        public Employee GetEmployeeByUserName(string userName)
-        {
-            try
-            {
-                using (var context = new MelodiasContext())
-                {
-                    return context.Employees.FirstOrDefault(e=>e.UserName ==userName);
-                }
-            }
-            catch (EntityException ex)
-            {
-                throw new Exception(ex.Message);
-            }
-        }
-
+       
+    
 
         public int GetIdEmployeeByUserName(string userName)
         {

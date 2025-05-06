@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DataAccess.DAO;
+using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.ServiceModel;
@@ -8,6 +9,9 @@ namespace MelodiasService
     [ServiceContract]
     public interface ISalesManager
     {
+        [OperationContract]
+        EarningsReport GetEarningsReport(DateTime startDate, DateTime endDate);
+
         [OperationContract]
         List<SaleDataContract> GetSales(string customerName, DateTime? date);
 
@@ -66,4 +70,6 @@ namespace MelodiasService
         [DataMember]
         public decimal Subtotal { get; set; }
     }
+   
+
 }

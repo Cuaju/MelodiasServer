@@ -13,6 +13,9 @@ namespace MelodiasService
     public interface IUsersManager
     {
         [OperationContract]
+        bool EditEmployee(int idEmployee, EmployeeDataContract updatedEmployee);
+
+        [OperationContract]
         bool LogIn(string username, string password);
 
         [OperationContract]
