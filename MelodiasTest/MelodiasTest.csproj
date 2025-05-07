@@ -105,6 +105,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ProductDAO\TestProductDAO.cs" />
+    <Compile Include="ReportDAO\TestReportDao.cs" />
     <Compile Include="SupplierDAOTEST\SupplierDaoTests.cs" />
     <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

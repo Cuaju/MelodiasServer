@@ -173,39 +173,39 @@ namespace DataAccess.DAO
             }
         }
         public EarningsReport GetEarningsReport(DateTime startDate, DateTime endDate)
-{
-    try
-    {
-        using (var context = new MelodiasContext())
         {
-            var sales = context.Sales
-                .Include(s => s.SaleDetails.Select(d => d.Product))
-                .Where(s => DbFunctions.TruncateTime(s.SaleDate) >= DbFunctions.TruncateTime(startDate)
-                         && DbFunctions.TruncateTime(s.SaleDate) <= DbFunctions.TruncateTime(endDate)
-                         && !s.IsCancelled)
-                .ToList();
-
-            var details = sales.SelectMany(s => s.SaleDetails).ToList();
-
-            decimal gross = details.Sum(d => d.Quantity * d.UnitPrice);
-            decimal net = details.Sum(d => d.Quantity * (d.UnitPrice - d.Product.PurchasePrice));
-            int totalItems = details.Sum(d => d.Quantity);
-            int totalSales = sales.Count;
-
-            return new EarningsReport
+            try
             {
-                GrossEarnings = gross,
-                NetEarnings = net,
-                TotalSales = totalSales,
-                TotalItemsSold = totalItems
-            };
+                using (var context = new MelodiasContext())
+                {
+                    var sales = context.Sales
+                        .Include(s => s.SaleDetails.Select(d => d.Product))
+                        .Where(s => DbFunctions.TruncateTime(s.SaleDate) >= DbFunctions.TruncateTime(startDate)
+                                 && DbFunctions.TruncateTime(s.SaleDate) <= DbFunctions.TruncateTime(endDate)
+                                 && !s.IsCancelled)
+                        .ToList();
+
+                    var details = sales.SelectMany(s => s.SaleDetails).ToList();
+
+                    decimal gross = details.Sum(d => d.Quantity * d.UnitPrice);
+                    decimal net = details.Sum(d => d.Quantity * (d.UnitPrice - d.Product.PurchasePrice));
+                    int totalItems = details.Sum(d => d.Quantity);
+                    int totalSales = sales.Count;
+
+                    return new EarningsReport
+                    {
+                        GrossEarnings = gross,
+                        NetEarnings = net,
+                        TotalSales = totalSales,
+                        TotalItemsSold = totalItems
+                    };
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException("Error al generar el reporte de ganancias: " + ex.Message);
+            }
         }
-    }
-    catch (Exception ex)
-    {
-        throw new FaultException("Error al generar el reporte de ganancias: " + ex.Message);
-    }
-}
 
         public List<SalesByCategoryReport> GetSalesByCategoryReport(DateTime startDate, DateTime endDate)
         {
