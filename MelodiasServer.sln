@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MelodiasService", "Melodias
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess", "DataAccess\DataAccess.csproj", "{957DD9FF-E63A-4521-85F8-345C990E4A13}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MelodiasTest", "MelodiasTest\MelodiasTest.csproj", "{4ED0BDE5-2D26-4B90-9F72-D399F48B970A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{957DD9FF-E63A-4521-85F8-345C990E4A13}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{957DD9FF-E63A-4521-85F8-345C990E4A13}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{957DD9FF-E63A-4521-85F8-345C990E4A13}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4ED0BDE5-2D26-4B90-9F72-D399F48B970A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4ED0BDE5-2D26-4B90-9F72-D399F48B970A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4ED0BDE5-2D26-4B90-9F72-D399F48B970A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4ED0BDE5-2D26-4B90-9F72-D399F48B970A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
