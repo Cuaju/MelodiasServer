@@ -108,6 +108,7 @@
     <Compile Include="SupplierDAOTEST\SupplierDaoTests.cs" />
     <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserDAO\UserDaoTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
